@@ -1,0 +1,15 @@
+{
+  "name": "gmap",
+  "repo": "educabilia/gmap",
+  "description": "Friendlier Google Maps.",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "learnboost/jsonp": "*"
+  },
+  "development": {},
+  "license": "UNLICENSE",
+  "scripts": [
+    "index.js"
+  ]
+}
