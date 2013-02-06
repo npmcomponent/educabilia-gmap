@@ -7,6 +7,7 @@ function GMap(element) {
   this.element = element
   this.markers = []
   this.markerOptions = {}
+  this.tooltips = null
 }
 
 GMap.prototype.addMarkers = function(pairs) {
@@ -57,9 +58,12 @@ GMap.prototype._initMarkers = function() {
 
     var marker = new google.maps.Marker(options)
 
-    google.maps.event.addListener(marker, 'click', (function(i) {
-      return function() { gmap.emit('marker.click', i) }
-    })(i))
+    google.maps.event.addListener(marker, 'click', (function(i, marker) {
+      return function() {
+        gmap._showInfoWindow(i, marker)
+        gmap.emit('marker.click', i, marker)
+      }
+    })(i, marker))
   }
 }
 
@@ -73,6 +77,17 @@ GMap.prototype.getBounds = function() {
   }
 
   return bounds
+}
+
+GMap.prototype._showInfoWindow = function(index, marker) {
+  if (this.tooltips === null) return
+
+  var html = this.tooltips(index)
+
+  this._infoWindow = this._infoWindow || new google.maps.InfoWindow()
+
+  this._infoWindow.setContent(html)
+  this._infoWindow.open(this.map, marker)
 }
 
 Emitter(GMap.prototype)
