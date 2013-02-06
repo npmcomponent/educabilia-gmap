@@ -3,6 +3,7 @@ var noop = function() { }
 function GMap(element) {
   this.element = element
   this.markers = []
+  this.markerOptions = {}
 }
 
 GMap.prototype.addMarkers = function(pairs) {
@@ -40,11 +41,16 @@ GMap.prototype._initMap = function() {
 GMap.prototype._initMarkers = function() {
   var i; for (i = 0; i < this.markers.length; i++) {
     var pair = this.markers[i]
+      , options = {}
 
-    new google.maps.Marker({
-      position: new google.maps.LatLng(pair[0], pair[1]),
-      map: this.map
-    })
+    for (var key in this.markerOptions) {
+      if (this.markerOptions.hasOwnProperty(key)) options[key] = this.markerOptions[key]
+    }
+
+    options.position = new google.maps.LatLng(pair[0], pair[1])
+    options.map = this.map
+
+    new google.maps.Marker(options)
   }
 }
 
