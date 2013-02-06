@@ -3,7 +3,7 @@
   "repo": "educabilia/gmap",
   "description": "Friendlier Google Maps.",
   "version": "0.0.1",
-  "keywords": [],
+  "keywords": ["google", "maps", "ui"],
   "dependencies": {
     "learnboost/jsonp": "*"
   },
