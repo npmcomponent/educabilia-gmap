@@ -1,4 +1,7 @@
+'use strict'
+
 var noop = function() { }
+  , Emitter = require('emitter')
 
 function GMap(element) {
   this.element = element
@@ -39,6 +42,8 @@ GMap.prototype._initMap = function() {
 }
 
 GMap.prototype._initMarkers = function() {
+  var gmap = this
+
   var i; for (i = 0; i < this.markers.length; i++) {
     var pair = this.markers[i]
       , options = {}
@@ -50,7 +55,11 @@ GMap.prototype._initMarkers = function() {
     options.position = new google.maps.LatLng(pair[0], pair[1])
     options.map = this.map
 
-    new google.maps.Marker(options)
+    var marker = new google.maps.Marker(options)
+
+    google.maps.event.addListener(marker, 'click', (function(i) {
+      return function() { gmap.emit('marker.click', i) }
+    })(i))
   }
 }
 
@@ -65,5 +74,7 @@ GMap.prototype.getBounds = function() {
 
   return bounds
 }
+
+Emitter(GMap.prototype)
 
 module.exports = GMap
