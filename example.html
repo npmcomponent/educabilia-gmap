@@ -1,0 +1,24 @@
+<!doctype html>
+
+<script src='build/build.js'></script>
+
+<div id=map style='width: 600px; height: 500px'></div>
+
+<script>
+  var GMap = require('gmap')
+    , gmap = new GMap(document.getElementById('map'))
+
+  gmap.markerOptions.icon = 'http://educabilia.com/favicon.ico'
+
+  gmap.addMarkers([[25.686250,-80.364500],[40.721439,-73.653321],[34.783368,-86.568502],[32.364317,-86.295677]])
+
+  gmap.on('marker.click', function(index) {
+    console.log('Clicked on marker #' + index)
+  })
+
+  gmap.tooltipBuilder = function(index) {
+    return '<h1>This is marker #' + index + '</h1>'
+  }
+
+  gmap.init()
+</script>
