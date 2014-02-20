@@ -1,7 +1,7 @@
 'use strict'
 
 var noop = function() { }
-  , Emitter = require('emitter')
+  , Emitter = require('component-emitter')
 
 function GMap(element) {
   this.element = element
@@ -21,7 +21,7 @@ GMap.prototype.init = function(done) {
 
   if (this._initialized) done()
   else {
-    var jsonp = require('jsonp')
+    var jsonp = require('learnboost-jsonp')
       , gmap = this
 
     jsonp('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', {}, function() {

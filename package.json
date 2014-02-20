@@ -1,0 +1,15 @@
+{
+  "name": "educabilia-gmap",
+  "description": "Friendlier Google Maps.",
+  "version": "0.0.1",
+  "keywords": [
+    "google",
+    "maps",
+    "ui"
+  ],
+  "dependencies": {
+    "learnboost-jsonp": "git://github.com/npmcomponent/learnboost-jsonp.git",
+    "component-emitter": "git://github.com/npmcomponent/component-emitter.git"
+  },
+  "license": "UNLICENSE"
+}
